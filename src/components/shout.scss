@@ -1,0 +1,27 @@
+.shout-card {
+    display: flex;
+    height: 120px;
+    box-shadow: 0 4px 6px 1px lightgrey;
+    .user-image {
+        display: flex;
+        background: lightgrey;
+        img {
+            width: 110px;
+            object-fit: cover;
+        }
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 20px;
+        .timestamp {
+            font-size: 10px;
+            color: lightgray;
+        }
+        .body-text {
+            color: #333333;
+            font-weight: 600;
+        }
+    }
+}
