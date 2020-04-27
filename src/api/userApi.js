@@ -14,6 +14,21 @@ const userApis = {
             });
     },
 
+    signup: (newUserData) => {
+        return axios
+            .post("/signup", newUserData)
+            .then((res) => {
+                console.log(res);
+                return res
+            })
+            .catch((error) => {
+                console.log(error);
+                return error
+            });
+    },
+
+    
+
 
 }
 

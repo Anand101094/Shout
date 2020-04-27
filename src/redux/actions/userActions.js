@@ -1,15 +1,22 @@
-import { LOGIN_REQUESTED } from '../constant'
+import { types } from '../constant'
 
 const userActions = {
 
     login: (userCredentials) => {
         return {
-            type: LOGIN_REQUESTED,
+            type: types.LOGIN_REQUESTED,
             userCredentials
         }
     },
 
-    
+    signup: (newUserData) => {
+        return {
+            type: types.SIGNUP_REQUESTED,
+            newUserData
+        }
+    },
+
+
 }
 
 export default userActions

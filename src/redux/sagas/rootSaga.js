@@ -1,20 +1,29 @@
-import { takeEvery, put, all } from 'redux-saga/effects'
+import { types } from "../constant"
+import { takeEvery, put, takeLatest } from 'redux-saga/effects'
 
 import userApis from "../../api/userApi"
 
 function* loginUser(action) {
-    console.log('3')
     let response = yield userApis.login(action.userCredentials)
-    console.log(response)
     if (response.data) {
-        yield put({ type: "LOGIN_SUCCESS", userToken: response.data.token }) 
+        yield put({ type: types.LOGIN_SUCCESS, userToken: response.data.token })
     } else {
-        yield put({ type: "LOGIN_FAILED" })
+        yield put({ type: types.LOGIN_FAILED })
+    }
+}
+
+function* signupUser(action) {
+    let response = yield userApis.signup(action.newUserData)
+    if (response.data) {
+        yield put({ type: types.SIGNUP_SUCCESS, userToken: response.data.token })
+    } else {
+        yield put({ type: types.SIGNUP_FAILED })
     }
 }
 
 export default function* rootSaga() {
-    yield takeEvery("LOGIN_REQUESTED", loginUser)
+    yield takeEvery(types.LOGIN_REQUESTED, loginUser)
+    yield takeLatest(types.SIGNUP_REQUESTED, signupUser)
 }
 
 

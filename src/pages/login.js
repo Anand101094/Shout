@@ -10,6 +10,8 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
 
   // componentWillReceiveProps
+  // saves the userToken to localstorage when the login is successful
+  // jumps the screen to Homepage
 
   useEffect(() => {
     if (props.loggedIn === "true") {

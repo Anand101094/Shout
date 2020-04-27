@@ -1,37 +1,39 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux"
+import userActions from "../redux/actions/userActions"
 import "./signup.scss";
+import Loader from "../globalComponent/loader"
 
-import axios from "axios";
 
 const Signup = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userName, setUserName] = useState("");
-  const [loader, setLoader] = useState(false);
+
+  // componentWillReceiveProps
+  // saves the userToken to localstorage when the signup is successful
+  // jumps the screen to Homepage
+
+  useEffect(() => {
+    if (props.signedUp === "true") {
+      localStorage.setItem("userToken", `Bearer ${props.userToken}`);
+      props.history.push("/");
+    }
+  }, [props.signedUp])
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
-    let userCredentials = {
+    let newUserData = {
       email,
       password,
       confirmPassword,
       userName,
     };
 
-    // send the payload to create the user
+    props.signup(newUserData)
 
-    axios
-      .post("/signup", userCredentials)
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem("userToken", `Bearer ${res.data.token}`);
-        props.history.push("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   return (
@@ -88,8 +90,25 @@ const Signup = (props) => {
           Signup
         </button>
       </form>
+
+      {
+        props.signedUp === "pending" ? <Loader /> : null
+      }
+
     </div>
   );
 };
 
-export default Signup;
+const mapStateToProps = (state) => {
+  return {
+    signedUp: state.user.signedUp
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signup: (newUserData) => dispatch(userActions.signup(newUserData))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
