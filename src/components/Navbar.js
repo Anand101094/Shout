@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./navbar.scss"
 
-const Navbar = (props) => {
+const Navbar = ({ authenticated, ...props }) => {
+
   return (
     <nav>
       <div className="nav-wrapper teal lighten-1">
@@ -10,10 +12,10 @@ const Navbar = (props) => {
             <Link to="/login">Login</Link>
           </li>
           <li>
-          <Link to="/">Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-          <Link to="/signup">Signup</Link>
+            <Link to="/signup">Signup</Link>
           </li>
         </ul>
       </div>
