@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import "./App.scss";
-import Loader from "../src/globalComponent/loader"
+import "./common.scss";
 
 import Home from "./pages/home";
 import Login from "./pages/login";
@@ -40,7 +40,6 @@ class App extends Component {
               />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
-              <Route exact path="/loader" component={Loader} />
             </Switch>
           </div>
         </BrowserRouter>

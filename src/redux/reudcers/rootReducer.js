@@ -4,7 +4,7 @@ import { uiReducer } from '../reudcers/uiReducer'
 import { userReducer } from '../reudcers/userReducer'
 
 const rootReducer = combineReducers({
-    shouts: shoutReducer,
+    shoutsData: shoutReducer,
     user: userReducer,
     ui: uiReducer,
 })

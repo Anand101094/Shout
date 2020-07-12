@@ -1,0 +1,21 @@
+.modal-main {
+    .modal-overlay {
+        display: flex;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: #8888;
+        .modal-container {
+            position: absolute;
+            background: white;
+            box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.18);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

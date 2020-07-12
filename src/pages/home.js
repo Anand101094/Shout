@@ -1,29 +1,46 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import axios from "axios";
-import Shout from '../components/Shout.js'
+import Modal from "../globalComponent/Modal/Modal";
+import AllShouts from "../components/allShouts";
+import Profile from "../components/profile";
+import PostShoutScreen from "../components/PostShoutScreen";
 
 const Home = (props) => {
+  const [userDetails, setUserDetails] = useState(null);
   const [shouts, setShouts] = useState(null);
 
   useEffect(() => {
-    axios.get("/shouts").then((res) => {
-      setShouts(res.data);
+    let headers = {
+      authorization: localStorage.getItem("userToken"),
+    };
+    axios.get("/user", { headers }).then((res) => {
+      setUserDetails(res.data);
     });
   }, []);
 
-  let recentShouts = shouts ? (
-    shouts.map((shout, index) => {
-      return <Shout key={index} shout={shout} />;
-    })
-  ) : (
-    <p>Loading...</p>
-  );
+  const postShout = () => {
+    ReactDOM.render(
+      <Modal specs="w6 h4">
+        <PostShoutScreen />
+      </Modal>,
+      document.getElementById("global-modal")
+    );
+  };
 
   return (
     <div className="row">
-      <div className="col s8">{recentShouts}</div>
+      <div className="col s8">
+        <div className="shout-btn">
+          <span>Wanna shout out loud... I can help</span>
+          <button className="btn btn-small blue" onClick={postShout}>
+            Shout !!!
+          </button>
+        </div>
+        <AllShouts />
+      </div>
       <div className="col s4">
-        <p>profile</p>
+        <Profile userDetails={userDetails ? userDetails.credentials : {}} />
       </div>
     </div>
   );

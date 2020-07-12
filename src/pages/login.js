@@ -3,7 +3,7 @@ import "./login.scss";
 import { connect } from 'react-redux'
 
 import userActions from "../redux/actions/userActions"
-import Loader from "../globalComponent/loader";
+import Loader from "../globalComponent/Loader/loader";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -21,7 +21,6 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
     let userCredentials = {
       email,
       password,

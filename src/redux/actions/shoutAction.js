@@ -1,7 +1,11 @@
-import { FETCH_SHOUTS } from '../constant'
+import { FETCHING_SHOUTS } from "../constant";
 
-export const fetchShouts = () => {
+const shoutAction = {
+  fetchShouts: () => {
     return {
-        type: FETCH_SHOUTS,
-    }
-}
+      type: FETCHING_SHOUTS,
+    };
+  },
+};
+
+export default shoutAction
