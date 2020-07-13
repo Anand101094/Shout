@@ -1,4 +1,4 @@
-import { LOGIN_REQUESTED } from '../constant'
+import { LOGIN_REQUESTED, SESSION_EXPIRED  } from '../constant'
 
 const userActions = {
 
@@ -9,6 +9,11 @@ const userActions = {
         }
     },
 
+    setExpiredSession: () => {
+        return {
+            type: SESSION_EXPIRED
+        }
+    }
     
 }
 

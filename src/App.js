@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import userAction from "../src/redux/actions/userActions";
 import "./App.scss";
 import "./common.scss";
 
@@ -12,31 +14,18 @@ import ProtectedRoute from "../src/util/protectedRoute";
 
 class App extends Component {
   render() {
-    let authenticated;
-    let userToken = localStorage.getItem("userToken");
-    if (userToken) {
-      let decodedToken = jwt_decode(userToken);
-      console.log(decodedToken);
-      if (decodedToken.exp * 1000 < Date.now()) { 
-        authenticated = false;
-      } else {
-        authenticated = true;
-      }
-    } else {
-      authenticated = false;
-    }
 
     return (
       <div className="app">
         <BrowserRouter>
-          <Navbar authenticated={authenticated} />
+          <Navbar authenticated={this.props.authenticated} />
           <div className="container">
             <Switch>
               <ProtectedRoute
                 exact
                 path="/"
                 component={Home}
-                authenticated={authenticated}
+                authenticated={this.props.authenticated}
               />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
@@ -48,4 +37,16 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    authenticated: state.user.authenticated,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sessionExpired: () => dispatch(userAction.setExpiredSession()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
