@@ -5,7 +5,6 @@ const userApis = {
         return axios
             .post("/login", userCredentials)
             .then((res) => {
-                console.log(res);
                 return res
             })
             .catch((error) => {
@@ -14,6 +13,18 @@ const userApis = {
             });
     },
 
+    signUpUser: (signUpData) => {
+        return axios
+            .post("/signup", signUpData)
+            .then(res => {
+                console.log(res)
+                return res
+            })
+            .catch(error => {
+                console.log(err)
+                return error
+            })
+    }
 
 }
 

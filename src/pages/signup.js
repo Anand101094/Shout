@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux"
+import userAction from "../redux/actions/userActions"
 import "./signup.scss";
 
 import axios from "axios";
@@ -10,28 +12,25 @@ const Signup = (props) => {
   const [userName, setUserName] = useState("");
   const [loader, setLoader] = useState(false);
 
+  useEffect(() => {
+    if (props.signedUp === "true") {
+      localStorage.setItem("userToken", `Bearer ${props.userToken}`);
+      props.history.push("/");
+    }
+  }, [props.signedUp])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email, password);
-    let userCredentials = {
+    let signUpData = {
       email,
       password,
       confirmPassword,
       userName,
     };
 
-    // send the payload to create the user
+    props.signUp(signUpData)
 
-    axios
-      .post("/signup", userCredentials)
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem("userToken", `Bearer ${res.data.token}`);
-        props.history.push("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   return (
@@ -92,4 +91,17 @@ const Signup = (props) => {
   );
 };
 
-export default Signup;
+const mapStateToProps = (state) => {
+  return {
+    userToken: state.user.userToken,
+    signedUp: state.user.signedUp
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (signUpData) => dispatch(userAction.signUp(signUpData))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

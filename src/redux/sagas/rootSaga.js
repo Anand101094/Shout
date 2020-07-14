@@ -21,7 +21,17 @@ function* getAllShouts(action) {
   }
 }
 
+function* signUpUser(action) {
+  let response = yield userApis.signUpUser(action.signUpData);
+  if (response.data) {
+    yield put({ type: "SIGNUP_SUCCESS", userToken: response.data.token });
+  } else {
+    yield put({ type: "SIGNUP_FAILED" });
+  }
+}
+
 export default function* rootSaga() {
+  yield takeEvery("SIGNUP_REQUESTED", signUpUser)
   yield takeEvery("LOGIN_REQUESTED", loginUser);
   yield takeEvery("FETCHING_SHOUTS", getAllShouts);
 }

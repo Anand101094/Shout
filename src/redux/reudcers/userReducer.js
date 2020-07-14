@@ -43,6 +43,28 @@ export function userReducer(state = initialState, action) {
         authenticated: false,
       };
 
+    case "SIGNUP_REQUESTED":
+      return {
+        ...state,
+        signedUp: "pending",
+        authenticated: false,
+      };
+
+    case "SIGNUP_SUCCESS":
+      return {
+        ...state,
+        signedUp: "true",
+        userToken: action.userToken,
+        authenticated: true,
+      };
+
+    case "SIGNUP_FAILED":
+      return {
+        ...state,
+        signedUp: "false",
+        authenticated: false,
+      };
+
     default:
       return state;
   }
