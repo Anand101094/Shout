@@ -31,7 +31,7 @@ function* signUpUser(action) {
 }
 
 function* postShout(action) {
-  let response = yield shoutApi.postShout(action.postData);
+  let response = yield shoutApi.postShout(action.payload);
   if (response.data) {
     yield put({ type: "POST_SHOUT_SUCCESS", userToken: response.data });
   } else {

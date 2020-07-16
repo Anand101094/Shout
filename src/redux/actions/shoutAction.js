@@ -6,10 +6,10 @@ const shoutAction = {
       type: FETCHING_SHOUTS,
     };
   },
-  postShout: (postData) => {
+  postShout: (payload) => {
     return {
       type: POST_SHOUT,
-      postData
+      payload
     };
   },
 };

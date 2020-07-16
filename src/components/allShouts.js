@@ -9,6 +9,8 @@ const AllShouts = (props) => {
     props.getShouts();
   }, []);
 
+
+
   let recentShouts = props.shouts ? (
     props.shouts.map((shout, index) => {
       return <Shout key={index} shout={shout} />;

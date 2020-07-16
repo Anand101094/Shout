@@ -25,7 +25,7 @@ const Shout = ({ shout }) => {
       <div className="content">
         <span className="user-name teal-text lighten-1">{userName}</span>
         <span className="timestamp">{dayjs(createdAt).fromNow()}</span>
-        <span className="body-text">{body}</span>
+        <span className="body-text">{`${body}`}</span>
       </div>
     </div>
   );

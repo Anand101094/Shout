@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 
 import "./post_shout_screen.scss"
 import { connect } from "react-redux";
@@ -13,7 +12,11 @@ const PostShoutScreen = (props) => {
   };
 
   const postShout = () => {
-    props.postShout(shout)
+    let payload={
+      postData:shout,
+      userToken:props.userToken
+    }
+    props.postShout(payload)
   };
 
   return (
@@ -40,10 +43,16 @@ const PostShoutScreen = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return{
-    postShout: (postData) => dispatch(shoutAction.postShout(postData))
+    userToken: state.user.userToken
   }
 }
 
-export default connect(null, mapDispatchToProps)(PostShoutScreen);
+const mapDispatchToProps = (dispatch) => {
+  return{
+    postShout: (payload) => dispatch(shoutAction.postShout(payload))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostShoutScreen);

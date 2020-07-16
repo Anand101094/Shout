@@ -36,7 +36,7 @@ const userApis = {
                 return res
             })
             .catch(error => {
-                console.log(err)
+                console.log(error)
                 return error
             })
     }

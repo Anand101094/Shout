@@ -12,15 +12,15 @@ const shoutApis = {
         return error;
       });
   },
-  postShout: (postData) => {
+  postShout: (payload) => {
     let body = {
-      body: postData,
+      body: payload.postData,
     };
-    let headers = {
-      authorization: localStorage.getItem("userToken"),
-    };
+    let headers={
+      authorization: payload.userToken
+  }
     return axios
-      .post("/shout", body, headers)
+      .post("/shout", body, {headers})
       .then((res) => {
         console.log(res);
         return res;
