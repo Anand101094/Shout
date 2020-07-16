@@ -5,12 +5,12 @@ const Loader = (props) => {
     return (
         <div className="loader-wrapper">
             <div id="bird">
-                <div class="lowerLip"></div>
-                <div class="crest"></div>
-                <div class="face"></div>
-                <div class="cheek"></div>
-                <div class="eye"></div>
-                <div class="upperLip"></div>
+                <div className="lowerLip"></div>
+                <div className="crest"></div>
+                <div className="face"></div>
+                <div className="cheek"></div>
+                <div className="eye"></div>
+                <div className="upperLip"></div>
             </div>
         </div>
     )

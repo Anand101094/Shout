@@ -8,7 +8,7 @@
         bottom: 0;
         right: 0;
         left: 0;
-        background-color: #8888;
+        background-color: #000000d1;
         .modal-container {
             position: absolute;
             background: white;
@@ -16,6 +16,21 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            .modal-header {
+                padding: 24px 24px 16px 24px;
+            }
+            .modal-content {
+                padding: 0 24px;
+                height: calc(100% - 133px);
+            }
+            .modal-footer {
+                padding: 16px 24px 24px 24px;
+                display: flex;
+                justify-content: flex-end;
+                .btn-cancel {
+                    margin: 0 8px;
+                }
+            }
         }
     }
 }

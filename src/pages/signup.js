@@ -3,14 +3,13 @@ import { connect } from "react-redux"
 import userAction from "../redux/actions/userActions"
 import "./signup.scss";
 
-import axios from "axios";
+import Loader from "../globalComponent/Loader/loader"
 
 const Signup = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userName, setUserName] = useState("");
-  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     if (props.signedUp === "true") {
@@ -87,6 +86,10 @@ const Signup = (props) => {
           Signup
         </button>
       </form>
+
+      {
+        props.signedUp === "pending" ? <Loader /> : null
+      }
     </div>
   );
 };

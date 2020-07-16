@@ -18,6 +18,21 @@ export function shoutReducer(state = initialState, action) {
         ...state,
         fetchingShouts: "failed",
       };
+      case "POST_SHOUT":
+      return {
+        ...state,
+        postShout: "pending",
+      };
+    case "POST_SHOUT_SUCCESS":
+      return {
+        ...state,
+        postShout: "completed",
+      };
+    case "POST_SHOUT_FAILED":
+      return {
+        ...state,
+        postShout: "failed",
+      };
     default:
       return state;
   }

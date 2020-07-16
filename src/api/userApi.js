@@ -24,6 +24,21 @@ const userApis = {
                 console.log(err)
                 return error
             })
+    },
+
+    getUserDetails: (userToken) => {
+        let headers={
+            authorization: userToken
+        }
+        return axios
+            .get("/user", {headers})
+            .then(res => {
+                return res
+            })
+            .catch(error => {
+                console.log(err)
+                return error
+            })
     }
 
 }

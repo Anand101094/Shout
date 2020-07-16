@@ -1,4 +1,5 @@
 import React ,{ useRef, useState } from "react";
+import {connect} from "react-redux"
 import axios from "axios";
 import "./profile.scss"
 
@@ -27,8 +28,8 @@ const Profile = (props) => {
     <div className="row profile-section">
         <div className="card">
           <div className="card-image">
-            <img src={props.userDetails.imageUrl} className="responsive-img"/>
-            <span className="card-title">{props.userDetails.userName}</span>
+            <img src={props.userDetails? props.userDetails.credentials.imageUrl : ""} className="responsive-img"/>
+            <span className="card-title">{props.userDetails ? props.userDetails.credentials.userName : null}</span>
             <input type="file" ref={imgUpload} id="img-ipload" name="img" accept="image/*" className="hide" onChange={uploadPicture}/>
             <a className="btn-floating halfway-fab waves-effect waves-light red" onClick={() => imgUpload.current.click()}>
               <i className="material-icons">camera</i>
@@ -46,4 +47,10 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+const mapStateToProps = (state) => {
+  return{
+    userDetails: state.user.userDetails
+  }
+}
+
+export default connect(mapStateToProps)(Profile);

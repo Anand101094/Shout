@@ -1,4 +1,4 @@
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
 const initialState = {};
 
 let userToken = localStorage.getItem("userToken");
@@ -8,6 +8,7 @@ if (userToken) {
     initialState.authenticated = false;
   } else {
     initialState.authenticated = true;
+    initialState.userToken = userToken;
   }
 } else {
   initialState.authenticated = false;
@@ -63,6 +64,27 @@ export function userReducer(state = initialState, action) {
         ...state,
         signedUp: "false",
         authenticated: false,
+      };
+
+    case "GET_USER_DETAILS":
+      return {
+        ...state,
+        getUserDetails: "pending",
+        userDetails: null,
+      };
+
+    case "GET_USER_DETAILS_SUCCESS":
+      return {
+        ...state,
+        getUserDetails: "completed",
+        userDetails: action.userDetails,
+      };
+
+    case "GET_USER_DETAILS_FAILED":
+      return {
+        ...state,
+        getUserDetails: "failed",
+        userDetails: null,
       };
 
     default:

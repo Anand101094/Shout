@@ -1,4 +1,4 @@
-import { LOGIN_REQUESTED, SESSION_EXPIRED, SIGNUP_REQUESTED } from '../constant'
+import { LOGIN_REQUESTED, SESSION_EXPIRED, SIGNUP_REQUESTED, GET_USER_DETAILS } from '../constant'
 
 const userActions = {
 
@@ -19,6 +19,12 @@ const userActions = {
         return{
             type: SIGNUP_REQUESTED,
             signUpData
+        }
+    },
+    getUserDetails: (payload) => {
+        return{
+            type: GET_USER_DETAILS,
+            payload
         }
     }
     

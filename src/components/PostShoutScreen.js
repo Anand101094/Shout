@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
 import ReactDOM from "react-dom";
+
+import "./post_shout_screen.scss"
+import { connect } from "react-redux";
+import shoutAction from "../redux/actions/shoutAction";
 
 const PostShoutScreen = (props) => {
   const [shout, setShout] = useState("");
@@ -10,38 +13,37 @@ const PostShoutScreen = (props) => {
   };
 
   const postShout = () => {
-    let body = {
-      body: shout,
-    };
-    let headers = {
-      authorization: localStorage.getItem("userToken")
-    }
-    axios.post("/shout", body, {headers}).then((res)=>{
-      console.log(res)
-    })
-    console.log(shout);
-  };
-
-  const closeModal = () => {
-    ReactDOM.unmountComponentAtNode(document.getElementById("global-modal"));
+    props.postShout(shout)
   };
 
   return (
     <div className="post-screen">
-      <textarea
-        rows="4"
-        name="shout"
-        onChange={handleChange}
-        value={shout}
-      ></textarea>
-      <button className="btn btn-small pink" onClick={closeModal}>
-        Cancel
-      </button>
-      <button className="btn btn-small pink" onClick={postShout}>
-        Post
-      </button>
+      <div className="modal-header">Post a Shout</div>
+      <div className="modal-content">
+        <textarea
+          rows="4"
+          name="shout"
+          className="post-textbox"
+          onChange={handleChange}
+          value={shout}
+        ></textarea>
+      </div>
+      <div className="modal-footer">
+        <button className="btn btn-small pink btn-cancel" onClick={props.onClose}>
+          Cancel
+        </button>
+        <button className="btn btn-small pink btn-post" onClick={postShout}>
+          Post
+        </button>
+      </div>
     </div>
   );
 };
 
-export default PostShoutScreen;
+const mapDispatchToProps = (dispatch) => {
+  return{
+    postShout: (postData) => dispatch(shoutAction.postShout(postData))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(PostShoutScreen);

@@ -4,7 +4,6 @@ import shoutAction from "../redux/actions/shoutAction"
 import Shout from "../components/Shout"
 
 const AllShouts = (props) => {
-  const [shouts, setShouts] = useState(null);
 
   useEffect(() => {
     props.getShouts();
