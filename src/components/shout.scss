@@ -1,6 +1,7 @@
 .shout-card {
     display: flex;
     height: 120px;
+    align-items: center;
     box-shadow: 0 4px 6px 1px lightgrey;
     .user-image {
         display: flex;
@@ -10,18 +11,60 @@
             object-fit: cover;
         }
     }
+
     .content {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding: 0 20px;
-        .timestamp {
-            font-size: 10px;
-            color: lightgray;
+        height: 100%;
+
+        .content-top {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 20px;
+            height: 65%;
+            .timestamp {
+                font-size: 10px;
+                color: lightgray;
+            }
+            .body-text {
+                color: #333333;
+                font-weight: 600;
+            }
         }
-        .body-text {
-            color: #333333;
-            font-weight: 600;
+
+        .content-bottom {
+            display: flex;
+            align-items: center;
+            height: 35%;
+            padding: 0 20px;
+
+            .favorite,
+            .comment {
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+                margin-right: 16px;
+            }
+
+            .fav-icon,
+            .com-icon {
+                font-size: 16px;
+                margin-right: 4px;
+                cursor: pointer;
+            }
+
+            .fav-icon {
+                &.liked {
+                    color: red;
+                }
+            }
         }
+    }
+
+    .delete-icon {
+        margin-left: auto;
+        padding: 0 8px;
+        cursor: pointer;
     }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 import userAction from "../src/redux/actions/userActions";
 import "./App.scss";
 import "./common.scss";

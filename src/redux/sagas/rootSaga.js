@@ -33,7 +33,8 @@ function* signUpUser(action) {
 function* postShout(action) {
   let response = yield shoutApi.postShout(action.payload);
   if (response.data) {
-    yield put({ type: "POST_SHOUT_SUCCESS", userToken: response.data });
+    yield put({ type: "POST_SHOUT_SUCCESS" });
+    yield put({ type: "FETCHING_SHOUTS" })
   } else {
     yield put({ type: "POST_SHOUT_FAILED" });
   }
@@ -48,10 +49,58 @@ function* getUserDetails(action) {
   }
 }
 
+function* deleteShout(action) {
+  let response = yield shoutApi.deleteShout(action.payload);
+  if (response.data) {
+    yield put({ type: "DELETE_SHOUT_SUCCESS" });
+  } else {
+    yield put({ type: "DELETE_SHOUT_FAILED" });
+  }
+}
+
+function* likeShout(action) {
+  let response = yield shoutApi.likeShout(action.payload);
+  if (response.data) {
+    yield put({ type: "LIKE_SHOUT_SUCCESS" });
+  }
+}
+
+function* unlikeShout(action) {
+  let response = yield shoutApi.unlikeShout(action.payload);
+  if (response.data) {
+    yield put({ type: "UNLIKE_SHOUT_SUCCESS" });
+  }
+}
+
+function* postComment(action) {
+  let response = yield shoutApi.postComment(action.payload);
+  if (response.data) {
+    yield put({ type: "POST_COMMENT_SUCCESS" });
+    yield put({ type: "FETCHING_SHOUTS" })
+  } else {
+    yield put({ type: "POST_COMMENT_FAILED" });
+  }
+}
+
+function* getShout(action) {
+  let response = yield shoutApi.getShout(action.payload);
+  if (response.data) {
+    yield put({ type: "GET_SHOUT_SUCCESS", shoutsCommentData: response.data });
+  } else {
+    yield put({ type: "GET_SHOUT_FAILED" });
+  }
+}
+
 export default function* rootSaga() {
   yield takeEvery("SIGNUP_REQUESTED", signUpUser)
   yield takeEvery("LOGIN_REQUESTED", loginUser);
   yield takeEvery("GET_USER_DETAILS", getUserDetails);
   yield takeEvery("FETCHING_SHOUTS", getAllShouts);
   yield takeEvery("POST_SHOUT", postShout);
+  yield takeEvery("DELETE_SHOUT", deleteShout);
+  yield takeEvery("LIKE_SHOUT", likeShout);
+  yield takeEvery("UNLIKE_SHOUT", unlikeShout);
+  yield takeEvery("POST_COMMENT", postComment);
+  yield takeEvery("GET_SHOUT", getShout);
+
 }

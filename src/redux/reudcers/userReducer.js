@@ -55,7 +55,7 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         signedUp: "true",
-        userToken: action.userToken,
+        userToken: `Bearer ${action.userToken}`,
         authenticated: true,
       };
 

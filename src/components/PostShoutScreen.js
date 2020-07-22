@@ -12,11 +12,13 @@ const PostShoutScreen = (props) => {
   };
 
   const postShout = () => {
-    let payload={
-      postData:shout,
-      userToken:props.userToken
+    let payload = {
+      postData: shout,
+      userToken: props.userToken
     }
     props.postShout(payload)
+    setShout("")
+    props.onClose()
   };
 
   return (
@@ -32,7 +34,7 @@ const PostShoutScreen = (props) => {
         ></textarea>
       </div>
       <div className="modal-footer">
-        <button className="btn btn-small pink btn-cancel" onClick={props.onClose}>
+        <button className="btn btn-small pink btn-cancel" onClick={() => props.onClose()}>
           Cancel
         </button>
         <button className="btn btn-small pink btn-post" onClick={postShout}>
@@ -44,13 +46,13 @@ const PostShoutScreen = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return{
+  return {
     userToken: state.user.userToken
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return{
+  return {
     postShout: (payload) => dispatch(shoutAction.postShout(payload))
   }
 }

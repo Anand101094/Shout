@@ -9,7 +9,6 @@ import userAction from "../redux/actions/userActions";
 import "./home.scss";
 
 const Home = (props) => {
-  const [userDetails, setUserDetails] = useState(null);
   const [postModal, setPostModal] = useState(false);
 
   useEffect(() => {
@@ -18,28 +17,30 @@ const Home = (props) => {
 
   return (
     <div className="row home-page">
-      <div className="col s7">
-        <div className="shout-btn">
-          <span>Wanna shout out loud... I can help</span>
-          <button className="btn btn-small blue" onClick={()=> setPostModal(true)}>
-            Shout !!!
+      <div className="home-page-wrapper">
+        <div className="col s7">
+          <div className="shout-btn">
+            <span>Wanna shout out loud... I can help</span>
+            <button className="btn btn-small blue" onClick={() => setPostModal(true)}>
+              Shout !!!
           </button>
+          </div>
+          <AllShouts />
         </div>
-        <AllShouts />
-      </div>
-      <div className="col s4 offset-s1">
-        <Profile userDetails={userDetails ? userDetails.credentials : {}}/>
-      </div>
-      {postModal
-        ? ReactDOM.createPortal(
+        <div className="col s4 offset-s1">
+          <Profile />
+        </div>
+        {postModal
+          ? ReactDOM.createPortal(
             <Modal specs="w6 h4">
-              <PostShoutScreen 
-                onClose = {()=> setPostModal(false)}
+              <PostShoutScreen
+                onClose={() => setPostModal(false)}
               />
             </Modal>,
             document.getElementById("global-modal")
           )
-        : null}
+          : null}
+      </div>
     </div>
   );
 };

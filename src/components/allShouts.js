@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import shoutAction from "../redux/actions/shoutAction"
 import Shout from "../components/Shout"
+import Loader from "../globalComponent/Loader/loader"
 
 const AllShouts = (props) => {
 
@@ -9,15 +10,15 @@ const AllShouts = (props) => {
     props.getShouts();
   }, []);
 
+  let likedShouts = props.userDetails ? props.userDetails.likes.map(item => item.shoutId) : []
 
-
-  let recentShouts = props.shouts ? (
+  let recentShouts = props.shouts && props.fetchingShouts !== "pending" ? (
     props.shouts.map((shout, index) => {
-      return <Shout key={index} shout={shout} />;
+      return <Shout key={index} shout={shout} liked={likedShouts.includes(shout.shoutId)} />;
     })
   ) : (
-    <p>Loading...</p>
-  );
+      <Loader />
+    );
 
   return <div className="all-shouts">{recentShouts}</div>;
 };
@@ -25,6 +26,8 @@ const AllShouts = (props) => {
 const mapStateToProps = (state) => {
   return {
     shouts: state.shoutsData.shouts,
+    fetchingShouts: state.shoutsData.fetchShouts,
+    userDetails: state.user.userDetails,
   };
 };
 
