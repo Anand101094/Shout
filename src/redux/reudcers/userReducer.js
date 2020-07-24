@@ -87,6 +87,24 @@ export function userReducer(state = initialState, action) {
         userDetails: null,
       };
 
+      case "ADD_USER_DETAILS":
+      return {
+        ...state,
+        addUserDetails: "pending",
+      };
+
+    case "ADD_USER_DETAILS_SUCCESS":
+      return {
+        ...state,
+        addUserDetails: "completed",
+      };
+
+    case "ADD_USER_DETAILS_FAILED":
+      return {
+        ...state,
+        addUserDetails: "failed",
+      };
+
     default:
       return state;
   }

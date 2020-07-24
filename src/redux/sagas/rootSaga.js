@@ -91,6 +91,15 @@ function* getShout(action) {
   }
 }
 
+function* addUserDetails(action) {
+  let response = yield userApis.addUserDetails(action.payload);
+  if (response.data) {
+    yield put({ type: "ADD_USER_SUCCESS" });
+  } else {
+    yield put({ type: "ADD_USER_FAILED" });
+  }
+}
+
 export default function* rootSaga() {
   yield takeEvery("SIGNUP_REQUESTED", signUpUser)
   yield takeEvery("LOGIN_REQUESTED", loginUser);
@@ -102,5 +111,6 @@ export default function* rootSaga() {
   yield takeEvery("UNLIKE_SHOUT", unlikeShout);
   yield takeEvery("POST_COMMENT", postComment);
   yield takeEvery("GET_SHOUT", getShout);
+  yield takeEvery("ADD_USER_DETAILS", addUserDetails);
 
 }

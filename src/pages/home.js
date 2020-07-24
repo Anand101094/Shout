@@ -32,7 +32,7 @@ const Home = (props) => {
         </div>
         {postModal
           ? ReactDOM.createPortal(
-            <Modal specs="w6 h4">
+            <Modal specs="w4 h4">
               <PostShoutScreen
                 onClose={() => setPostModal(false)}
               />

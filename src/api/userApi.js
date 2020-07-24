@@ -39,7 +39,26 @@ const userApis = {
                 console.log(error)
                 return error
             })
+    },
+
+    addUserDetails: (payload) => {
+        let body = payload.userDetails
+
+        let headers={
+            authorization: payload.userToken
+        }
+
+        return axios
+            .post("/user", body, {headers})
+            .then(res => {
+                return res
+            })
+            .catch(error => {
+                console.log(error)
+                return error
+            })
     }
+
 
 }
 
