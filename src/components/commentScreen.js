@@ -12,10 +12,6 @@ const CommentScreen = (props) => {
         props.getShout({ shoutId: props.shoutId })
     }, [])
 
-    const handleChange = (e) => {
-        setComment(e.target.value);
-    };
-
     const postComment = () => {
         let payload = {
             postData: comment,
@@ -23,9 +19,15 @@ const CommentScreen = (props) => {
             shoutId: props.shoutId
         }
         props.postComment(payload)
+        props.getShout({ shoutId: props.shoutId })
         setComment("")
-        props.onClose()
+        return
     };
+
+    const closeCommentModal = () => {
+        props.resetShoutData()
+        props.onClose()
+    }
 
     return (
         <div className="post-screen comment-on-shout-screen">
@@ -51,7 +53,7 @@ const CommentScreen = (props) => {
                     id="text"
                     type="text"
                     className="comment"
-                    onChange={handleChange}
+                    onChange={(e) => setComment(e.target.value)}
                     value={comment}
                 />
 
@@ -66,7 +68,7 @@ const CommentScreen = (props) => {
                 </div>
             </div>
             <div className="modal-footer">
-                <button className="btn btn-small pink btn-cancel" onClick={() => props.onClose()}>Cancel</button>
+                <button className="btn btn-small pink btn-cancel" onClick={closeCommentModal}>Cancel</button>
                 <button className="btn btn-small pink btn-post" onClick={postComment}>Post</button>
             </div>
         </div>
@@ -83,7 +85,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         postComment: (payload) => dispatch(shoutAction.postComment(payload)),
-        getShout: (payload) => dispatch(shoutAction.getShout(payload))
+        getShout: (payload) => dispatch(shoutAction.getShout(payload)),
+        resetShoutData: () => dispatch(shoutAction.resetShoutData())
     }
 }
 

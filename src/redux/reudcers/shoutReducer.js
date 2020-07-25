@@ -82,7 +82,7 @@ export function shoutReducer(state = initialState, action) {
         postComment: "failed",
       };
 
-      case "GET_SHOUT":
+    case "GET_SHOUT":
       return {
         ...state,
         getShout: "pending",
@@ -101,10 +101,10 @@ export function shoutReducer(state = initialState, action) {
         getShout: "failed",
       };
 
-      case "RESET_SHOUT_DATA":
+    case "RESET_SHOUT_DATA":
       return {
         ...state,
-        shoutData:[],
+        shoutData: [],
       };
 
     default:

@@ -8,7 +8,7 @@ import CommentScreen from "./commentScreen"
 import "./shout.scss";
 import Modal from "../globalComponent/Modal/Modal";
 
-const Shout = ({ shout, deleteShout, likeShout, unlikeShout, userToken, liked }) => {
+const Shout = ({ shout, deleteShout, likeShout, unlikeShout, userToken, liked, userDetails }) => {
 
   const [commentModal, setCommentModal] = useState(false)
 
@@ -45,7 +45,7 @@ const Shout = ({ shout, deleteShout, likeShout, unlikeShout, userToken, liked })
           <span className="comment" onClick={() => setCommentModal(true)}><i className="material-icons com-icon">comment</i>{`${commentCount} comments`}</span>
         </div>
       </div>
-      <div className="delete-icon" onClick={() => deleteShout({ shoutId, userToken })}><i className="material-icons">delete</i></div>
+      <div className="delete-icon" onClick={() => deleteShout({ shoutId, userToken })}>{userDetails && userDetails.userName === userName ? <i className="material-icons">delete</i> : null}</div>
 
       {
         commentModal ?
@@ -66,6 +66,7 @@ const Shout = ({ shout, deleteShout, likeShout, unlikeShout, userToken, liked })
 
 const mapStateToProps = (state) => {
   return {
+    userDetails: state.user.userDetails && state.user.userDetails.credentials,
     userToken: state.user.userToken
   }
 }

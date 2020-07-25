@@ -62,6 +62,7 @@ function* likeShout(action) {
   let response = yield shoutApi.likeShout(action.payload);
   if (response.data) {
     yield put({ type: "LIKE_SHOUT_SUCCESS" });
+    yield put({ type: "GET_USER_DETAILS" }, action.payload.userToken)
   }
 }
 
